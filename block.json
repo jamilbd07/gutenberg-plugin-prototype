@@ -1,0 +1,12 @@
+{
+	"name": "plugin-slug/plugin-name",
+	"title": "Block Prototype",
+	"category": "widgets",
+	"description": "Block Description",
+	"textdomain": "plugin-name",
+	"keywords": ["block", "prototype"],
+	"supports": {
+		"align": true
+	},
+	"editorScript": "file:./build/index.js"
+}
