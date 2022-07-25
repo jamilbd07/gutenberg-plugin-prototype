@@ -1,6 +1,6 @@
-# Gutenberg Plugin Prototype
+# Gutenberg Plugin Boilerplate
 
-This repository is a prototype for creating Gutenberg Block Plugin for WordPress. 
+This repository is a boilerplate for creating Gutenberg Block Plugin for WordPress. 
 
 
 ##  Requirements
