@@ -2,34 +2,20 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InspectorControls, PanelColorSettings } from "@wordpress/block-editor";
+import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
-	SelectControl,
-	ToggleControl,
-	Button,
-	ButtonGroup,
-	BaseControl,
-	TabPanel,
+	ColorPalette,
+	PanelRow,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
-import { select } from "@wordpress/data";
-
-/**
- * Internal depencencies
- */
-
-import objAttributes from "./attributes";
-
-import {
-	TEXT_ALIGN,
-	UNIT_TYPES,
-} from "./constants";
 
 function Inspector(props) {
 	const { attributes, setAttributes } = props;
 	const {
-		blockId,
+		titleTag,
+		titleColor
 	} = attributes;
 
 	return (
@@ -39,27 +25,49 @@ function Inspector(props) {
 					title={__("General", "gutenberg-plugin-prototype")}
 					initialOpen={true}
 				>
-					{/* <SelectControl
-						label={__("Layouts", "gutenberg-plugin-prototype")}
-						value={layouts}
-						options={LAYOUTS}
-						onChange={(layouts) => setAttributes({ layouts })}
+					<PanelRow>Text Color</PanelRow>
+					<ColorPalette
+						colors={[]}
+						value={titleColor}
+						onChange={(value) => { setAttributes({ titleColor: value }) }}
 					/>
 
-					<ToggleControl
-						label={__("Display Caption", "gutenberg-plugin-prototype")}
-						checked={displayCaption}
-						onChange={() =>
-							setAttributes({ displayCaption: !displayCaption })
-						}
-					/>
-					<ColorControl
-						label={__("Background Color", "gutenberg-plugin-prototype")}
-						color={captionBGColor}
-						onChange={(backgroundColor) =>
-							setAttributes({ captionBGColor: backgroundColor })
-						}
-					/> */}
+					<ToggleGroupControl
+						__nextHasNoMarginBottom
+						isBlock
+						value={titleTag}
+						label="Select Tag"
+						onChange={(tag) => setAttributes({ titleTag: tag })}
+					>
+						<ToggleGroupControlOption
+							label="H1"
+							value="h1"
+						/>
+						<ToggleGroupControlOption
+							label="H2"
+							value="h2"
+						/>
+						<ToggleGroupControlOption
+							label="H3"
+							value="h3"
+						/>
+						<ToggleGroupControlOption
+							label="H4"
+							value="h4"
+						/>
+						<ToggleGroupControlOption
+							label="H5"
+							value="h5"
+						/>
+						<ToggleGroupControlOption
+							label="H6"
+							value="h6"
+						/>
+						<ToggleGroupControlOption
+							label="P"
+							value="p"
+						/>
+					</ToggleGroupControl>
 				</PanelBody>
 			</div>
 		</InspectorControls>

@@ -1,5 +1,6 @@
 const example = {
 	attributes: {
+		title: "Hello World!"
 	}
 };
 

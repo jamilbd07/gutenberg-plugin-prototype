@@ -14,21 +14,18 @@ import example from "./example";
 import { Icon } from "./icon";
 import deprecated from "./deprecated";
 import "./style.scss";
-import metadata from "../block.json";
+import metadata from "./block.json";
+
+const { name } = metadata;
 
 registerBlockType(
 	{
-		name: "plugin-slug/plugin-name",
+		name: name,
 		...metadata
 	},
 	{
 		icon: Icon,
 		attributes: Attributes,
-		keywords: [
-			__("images", "essential-blocks"),
-			__("photos", "essential-blocks"),
-			__("eb image gallery", "essential-blocks"),
-		],
 		edit: Edit,
 		save: Save,
 		example,

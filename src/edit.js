@@ -3,17 +3,10 @@
  */
 import { __ } from "@wordpress/i18n";
 import {
-	BlockControls,
 	useBlockProps,
+	RichText
 } from "@wordpress/block-editor";
-import {
-	ToolbarGroup,
-	ToolbarItem,
-	ToolbarButton,
-	Button,
-} from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import { select } from "@wordpress/data";
+import { useEffect } from "@wordpress/element";
 
 /**
  * Internal depencencies
@@ -26,13 +19,18 @@ export default function Edit(props) {
 	const { attributes, setAttributes, className, clientId, isSelected } = props;
 	const {
 		blockId,
+		title,
+		titleTag,
+		titleColor,
 	} = attributes;
 
 	// 
 	useEffect(() => {
-		setAttributes({
-			blockId: clientId,
-		});
+		if (!blockId) {
+			setAttributes({
+				blockId: `block-${Math.floor((Math.random() * 987654))}`,
+			});
+		}
 	}, []);
 
 	const blockProps = useBlockProps({
@@ -46,8 +44,14 @@ export default function Edit(props) {
 			)}
 			<div {...blockProps}>
 				<div className={`block-wrapper ${blockId}`} data-id={blockId}>
-					<h2>Block Prototype</h2>
-					{/* ... */}
+					<RichText
+						tagName={titleTag} // The tag here is the element output and editable in the admin
+						value={title} // Any existing content, either from the database or an attribute default
+						allowedFormats={['core/bold', 'core/italic']} // Allow the content to be made bold or italic, but do not allow other formatting options
+						onChange={(title) => setAttributes({ title })} // Store updated content as a block attribute
+						placeholder={__('Write your Text here...')} // Display this text before any content has been added by the user
+						style={{ color: titleColor }}
+					/>
 				</div>
 			</div>
 		</>
